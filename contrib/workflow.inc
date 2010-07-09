@@ -1,3 +1,6 @@
+<?php
+// $Id$
+
 /**
  * @file
  * CRUD functions for Workflow states, transitions and workflow IDs
