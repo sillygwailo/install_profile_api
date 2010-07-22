@@ -46,7 +46,7 @@ function install_workflow_get_transition_id($from, $to) {
  *   The numeric state ID.
  */
 function install_workflow_get_sid($state_name, $module = NULL) {
-  if (!isset($module)) {
+  if (!is_null($module)) {
     $module = 'workflow';
   }
   $sid = db_result(db_query("SELECT sid FROM {workflow_states} WHERE state = '%s' AND module = '%s'", $state_name, $module));
