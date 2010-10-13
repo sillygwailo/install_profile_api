@@ -10,14 +10,18 @@
  * Given a workflow machine name, return the numeric workflow ID
  *
  * Assumes the presence of the patch to add Features compatibility
- * available at http://drupal.org/node/558378
+ * available at http://drupal.org/node/558378 Using the existence
+ * of the machine_name column in the {workflow} table as evidence
+ * that the patch has been applied.
  *
  * @return
  *   numeric workflow ID
  */
 function install_workflow_get_wid($machine_name) {
-  $wid = db_result(db_query_range("SELECT wid FROM {workflows} WHERE machine_name ='%s'", $machine_name, 0, 1));
-  return $wid;
+  if (db_column_exists("workflows", "machine_name")) {
+    $wid = db_result(db_query("SELECT wid FROM {workflows} WHERE machine_name ='%s'", $machine_name));
+    return $wid;
+  }
 }
 
 /**
